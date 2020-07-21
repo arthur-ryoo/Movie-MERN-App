@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaCode } from 'react-icons/fa';
 import { API_URL, API_KEY, IMAGE_URL } from '../../Config';
 
+import GridCard from './Sections/GridCard';
 import MainImage from './Sections/MainImage';
 
 import { Typography, Row } from 'antd';
@@ -37,7 +38,17 @@ function LandingPage() {
         <hr />
 
         <Row gutter={[16, 16]}></Row>
-
+        {Movies &&
+          Movies.map((movie, index) => (
+            <React.Fragment key={index}>
+              <GridCard
+                image={
+                  movie.poster_path && `${IMAGE_URL}w500${movie.poster_path}`
+                }
+                movieId={movie.id}
+              />
+            </React.Fragment>
+          ))}
         <br />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button onClick> Load More </button>
