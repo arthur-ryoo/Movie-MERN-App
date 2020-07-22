@@ -37,18 +37,19 @@ function LandingPage() {
         <Title level={2}> Movies by latest</Title>
         <hr />
 
-        <Row gutter={[16, 16]}></Row>
-        {Movies &&
-          Movies.map((movie, index) => (
-            <React.Fragment key={index}>
-              <GridCard
-                image={
-                  movie.poster_path && `${IMAGE_URL}w500${movie.poster_path}`
-                }
-                movieId={movie.id}
-              />
-            </React.Fragment>
-          ))}
+        <Row gutter={[16, 16]}>
+          {Movies &&
+            Movies.map((movie, index) => (
+              <React.Fragment key={index}>
+                <GridCard
+                  image={
+                    movie.poster_path && `${IMAGE_URL}w500${movie.poster_path}`
+                  }
+                  movieId={movie.id}
+                />
+              </React.Fragment>
+            ))}
+        </Row>
         <br />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button onClick> Load More </button>
