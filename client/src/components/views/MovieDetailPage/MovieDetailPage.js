@@ -6,6 +6,7 @@ import { Descriptions, Button } from 'antd';
 
 function MovieDetailPage(props) {
   const [Movie, setMovie] = useState([]);
+  const [Crews, setCrews] = useState([]);
 
   useEffect(() => {
     const movidId = props.match.params.movieId;
@@ -13,8 +14,13 @@ function MovieDetailPage(props) {
     fetch(`${API_URL}movie/${movidId}?api_key=${API_KEY}&language=en-US`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setMovie(response);
+
+        fetch(`${API_URL}movie/${movidId}?credits?api_key=${API_KEY}`)
+          .then((response) => response.json())
+          .then((response) => {
+            setCrews(response);
+          });
       });
   }, []);
 
