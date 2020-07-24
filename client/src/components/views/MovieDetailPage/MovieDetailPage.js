@@ -8,7 +8,7 @@ import GridCard from '../LandingPage/Sections/GridCard';
 function MovieDetailPage(props) {
   const [Movie, setMovie] = useState([]);
   const [Crews, setCrews] = useState([]);
-
+  const [ActorToggle, setActorToggle] = useState(false);
   useEffect(() => {
     const movidId = props.match.params.movieId;
 
@@ -25,6 +25,10 @@ function MovieDetailPage(props) {
           });
       });
   }, []);
+
+  const handleClick = () => {
+    setActorToggle(!ActorToggle);
+  };
 
   return (
     <div>
@@ -66,22 +70,23 @@ function MovieDetailPage(props) {
         <br />
         <br />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button>Toggle Actor View</Button>
+          <Button onClick={handleClick}>Toggle Actor View</Button>
         </div>
-
-        <Row gutter={[16, 16]}>
-          {Crews &&
-            Crews.map((crew, index) => (
-              <React.Fragment key={index}>
-                {crew.profile_path && (
-                  <GridCard
-                    actor
-                    image={`${IMAGE_URL}w500${crew.profile_path}`}
-                  />
-                )}
-              </React.Fragment>
-            ))}
-        </Row>
+        {ActorToggle && (
+          <Row gutter={[16, 16]}>
+            {Crews &&
+              Crews.map((crew, index) => (
+                <React.Fragment key={index}>
+                  {crew.profile_path && (
+                    <GridCard
+                      actor
+                      image={`${IMAGE_URL}w500${crew.profile_path}`}
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+          </Row>
+        )}
       </div>
     </div>
   );
