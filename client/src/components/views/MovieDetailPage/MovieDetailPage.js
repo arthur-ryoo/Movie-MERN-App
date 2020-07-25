@@ -4,6 +4,7 @@ import { API_URL, API_KEY, IMAGE_URL } from '../../Config';
 import MainImage from '../LandingPage/Sections/MainImage';
 import { Descriptions, Button, Row } from 'antd';
 import GridCard from '../LandingPage/Sections/GridCard';
+import Favorite from './Sections/Favorite';
 
 function MovieDetailPage(props) {
   const [Movie, setMovie] = useState([]);
@@ -44,7 +45,7 @@ function MovieDetailPage(props) {
 
       <div style={{ width: '85%', margin: '1rem auto' }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button>Add to Favorite</Button>
+          <Favorite />
         </div>
         <Descriptions title="Movie Info" bordered>
           <Descriptions.Item label="Title">
