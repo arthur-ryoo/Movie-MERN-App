@@ -10,15 +10,15 @@ function MovieDetailPage(props) {
   const [Movie, setMovie] = useState([]);
   const [Crews, setCrews] = useState([]);
   const [ActorToggle, setActorToggle] = useState(false);
-  useEffect(() => {
-    const movidId = props.match.params.movieId;
+  const movieId = props.match.params.movieId;
 
-    fetch(`${API_URL}movie/${movidId}?api_key=${API_KEY}&language=en-US`)
+  useEffect(() => {
+    fetch(`${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`)
       .then((response) => response.json())
       .then((response) => {
         setMovie(response);
 
-        fetch(`${API_URL}movie/${movidId}/credits?api_key=${API_KEY}`)
+        fetch(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
           .then((response) => response.json())
           .then((response) => {
             console.log(response);
@@ -45,7 +45,11 @@ function MovieDetailPage(props) {
 
       <div style={{ width: '85%', margin: '1rem auto' }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Favorite />
+          <Favorite
+            userFrom={localStorage.getItem('userId')}
+            movieId={movieId}
+            movieInfo={Movie}
+          />
         </div>
         <Descriptions title="Movie Info" bordered>
           <Descriptions.Item label="Title">
