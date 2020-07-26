@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function Favorite(props) {
   const [FavoriteNumber, setFavoriteNumber] = useState(0);
+  const [Favorited, setFavorited] = useState(false);
 
   useEffect(() => {
     const variable = {
@@ -20,10 +21,22 @@ function Favorite(props) {
         alert('Failed to get favoriteNumber');
       }
     });
-  });
+
+    axios.post('/api/favorite/favorited', variable).then((response) => {
+      if (response.data.success) {
+        setFavorited(response.data.favorited);
+      } else {
+        alert('Failed to get Favortie Info');
+      }
+    });
+  }, []);
+
   return (
     <div>
-      <button>Add to Favorite</button>
+      <button>
+        {Favorited ? ' remove from Favorite ' : ' Add to Favorite'}{' '}
+        {FavoriteNumber}
+      </button>
     </div>
   );
 }
