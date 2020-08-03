@@ -9,6 +9,11 @@ const favortieSchema = mongoose.Schema({
   movidId: {
     type: String,
   },
+
+  movieTitle: {
+    type: String,
+  },
+
   movieImage: {
     type: String,
   },
