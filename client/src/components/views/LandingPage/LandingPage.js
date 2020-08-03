@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FaCode } from 'react-icons/fa';
 import { API_URL, API_KEY, IMAGE_URL } from '../../Config';
 
 import GridCard from './Sections/GridCard';
