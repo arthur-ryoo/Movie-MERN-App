@@ -37,7 +37,7 @@ router.post('/addToFavorite', auth, (req, res) => {
   });
 });
 
-router.post('/removeFromFavorite', auth, (req, res) => {
+router.post('/removeFromFavorite', (req, res) => {
   Favorite.findOneAndDelete({
     movieId: req.body.movieId,
     userFrom: req.body.userFrom,
