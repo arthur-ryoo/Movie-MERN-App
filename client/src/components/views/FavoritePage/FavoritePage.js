@@ -24,8 +24,10 @@ function FavoritePage() {
   const renderTableBody = FavoritedMovies.map((movie, index) => {
     const content = (
       <div>
-        {movie.moviePost} ?
-        <img src={`${IMAGE_URL}w500${moviePost}`} alt="moviePost" />: "no image"
+        {movie.movieImage} ?
+        <img src={`${IMAGE_URL}w500${movie.movieImage}`} />
+        :
+        "no image"
       </div>
     );
 
