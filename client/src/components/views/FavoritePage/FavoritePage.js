@@ -10,6 +10,10 @@ function FavoritePage() {
   const [FavoritedMovies, setFavoritedMovies] = useState([]);
 
   useEffect(() => {
+    fetchFavoritedMovies();
+  }, []);
+
+  const fetchFavoritedMovies = () => {
     Axios.post('./api/favorite/getFavoritedMovie', variables).then(
       (response) => {
         if (response.data.success) {
@@ -19,15 +23,29 @@ function FavoritePage() {
         }
       }
     );
-  }, []);
+  };
 
+  const onClickRemove = (movieId) => {
+    const variable = {
+      movieId: movieId,
+      userFrom: localStorage.getItem('userId'),
+    };
+
+    Axios.post('/api/favorite/removeFromFavorite', variable).then(
+      (response) => {
+        if (response.data.success) {
+          fetchFavoritedMovies();
+        } else {
+          alert('Failed to remove from favorite');
+        }
+      }
+    );
+  };
   const renderTableBody = FavoritedMovies.map((movie, index) => {
     const content = (
       <div>
         {movie.movieImage} ?
-        <img src={`${IMAGE_URL}w500${movie.movieImage}`} />
-        :
-        "no image"
+        <img src={`${IMAGE_URL}w500${movie.movieImage}`} />: "no image"
       </div>
     );
 
@@ -39,7 +57,9 @@ function FavoritePage() {
 
         <td>{movie.movieRunTime} mins</td>
         <td>
-          <button>Remove from the Favorites</button>
+          <button onClick={() => onClickRemove(movie.movieId)}>
+            Remove from the Favorites
+          </button>
         </td>
       </tr>
     );
