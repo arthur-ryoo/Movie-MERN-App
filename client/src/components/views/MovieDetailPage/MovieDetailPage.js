@@ -21,7 +21,6 @@ function MovieDetailPage(props) {
         fetch(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
             setCrews(response.cast);
           });
       });
