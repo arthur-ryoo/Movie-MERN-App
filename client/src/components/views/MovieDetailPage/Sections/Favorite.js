@@ -14,19 +14,18 @@ function Favorite(props) {
   };
 
   useEffect(() => {
-    axios.post('./api/favorite/favoriteNumber', variable).then((response) => {
+    axios.post('/api/favorite/favoriteNumber', variable).then((response) => {
       if (response.data.success) {
         setFavoriteNumber(response.data.favoriteNumber);
       } else {
         alert('Failed to get favoriteNumber');
       }
     });
-
     axios.post('/api/favorite/favorited', variable).then((response) => {
       if (response.data.success) {
         setFavorited(response.data.favorited);
       } else {
-        alert('Failed to get Favortie Info');
+        console.log('Failed to get Favortie Info');
       }
     });
   }, []);
