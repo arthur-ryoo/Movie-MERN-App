@@ -16,8 +16,10 @@ router.post('/favoriteNumber', auth, (req, res) => {
 });
 
 router.post('/favorited', auth, (req, res) => {
-  Favorite.find({ movieId: req.body.movieId, userFrom: req.body.userFrom });
-  exec((err, favorite) => {
+  Favorite.find({
+    movieId: req.body.movieId,
+    userFrom: req.body.userFrom,
+  }).exec((err, favorite) => {
     if (err) return res.status(400).send(err);
 
     let result = false;
